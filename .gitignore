@@ -1,0 +1,6 @@
+# Ignore environment files
+mongo.env
+mongo-express.env
+
+# Ignore data folder
+data/*
