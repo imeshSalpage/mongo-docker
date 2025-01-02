@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  db:
+    container_name: mongo-dev
+    image: mongo:4.2
+    env_file:
+      - ./mongo.env
+    networks:
+      - mongo-compose-network
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./data:/data/db
+
+  mongo-express:
+    container_name: mongo-express
+    image: mongo-express
+    depends_on:
+      - db
+    env_file:
+      - ./mongo-express.env
+    networks:
+      - mongo-compose-network
+    ports:
+      - '8081:8081'
+    volumes:
+      - ./data:/data/db
+
+networks:
+  mongo-compose-network:
+    driver: bridge
